@@ -1,15 +1,20 @@
 from flask import Flask
 import config
-import time
-from routes import index
+import Logger
+from threading import Thread
+import route_list
 
+logger = Logger.logger
+Logger.logging_start()
 app = Flask(__name__)
 
-app.add_url_rule("/", "index", index.main)
+for route in route_list.routes:
+    app.add_url_rule(route['route'], route['name'], route['function'], methods=route['methods'])
+    logger.info("Created route: " + route['name'] + " on works: http://" + config.SERVER_HOST + ":" + str(config.SERVER_PORT) + str(route['route']) + " works with methods: " +str(route['methods']))
 
 try:
+    logger.info("Webserver successfully created. Connect with http://%s:%s" % (config.SERVER_HOST, config.SERVER_PORT))
     app.run(host=config.SERVER_HOST, port=config.SERVER_PORT, debug=config.SERVER_DEBUG)
-    print("Webserver successfully created. Connect with http://%s:%s" % (config.SERVER_HOST, config.SERVER_PORT))
 except Exception as e:
-    print("Couldn't created webserver.")
-    print("ERROR", e)
+    logger.critical("Couldn't created webserver.")
+    logger.error("ERROR", e)
