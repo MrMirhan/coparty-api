@@ -1,17 +1,17 @@
-from routes import index_route
-from routes import reg_route
+from routes import Index
+from routes import Register
 
 routes = [
     {
         "route": "/",
         "name": "index",
-        "function": index_route.main,
+        "function": Index.main,
         "methods": ["GET"]
     },
     {
         "route": "/register",
         "name": "register",
-        "function": reg_route.main,
-        "methods": ["POST"]
+        "function": Register.main,
+        "methods": ["POST", "GET"]
     }
 ]

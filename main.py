@@ -2,13 +2,13 @@ from flask import Flask
 import config
 import Logger
 from threading import Thread
-import route_list
+import Routes
 
 logger = Logger.logger
 Logger.logging_start()
 app = Flask(__name__)
 
-for route in route_list.routes:
+for route in Routes.routes:
     app.add_url_rule(route['route'], route['name'], route['function'], methods=route['methods'])
     logger.info("Created route: " + route['name'] + " on works: http://" + config.SERVER_HOST + ":" + str(config.SERVER_PORT) + str(route['route']) + " works with methods: " +str(route['methods']))
 
