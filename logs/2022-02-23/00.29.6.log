@@ -1,0 +1,8 @@
+23-02-22 00:29:06 - INFO :: Process started.
+23-02-22 00:29:06 - INFO :: Created route: index on works: http://127.0.0.1:5000/ works with methods: ['GET']
+23-02-22 00:29:06 - INFO :: Created route: register on works: http://127.0.0.1:5000/register works with methods: ['POST']
+23-02-22 00:29:06 - INFO :: Created route: login on works: http://127.0.0.1:5000/login works with methods: ['POST']
+23-02-22 00:29:06 - INFO :: Created route: validate on works: http://127.0.0.1:5000/validate works with methods: ['POST']
+23-02-22 00:29:06 - INFO :: Webserver successfully created. Connect with http://127.0.0.1:5000
+23-02-22 00:29:06 - WARNING ::  * Debugger is active!
+23-02-22 00:29:06 - INFO ::  * Debugger PIN: 313-827-184
