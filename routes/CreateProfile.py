@@ -7,6 +7,6 @@ def main():
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     if request.method == "POST":
-        return login_user(request.form['mail'], request.form['passwd'])
+        return login_user(request.form['mail'], request.form['username'])
     else:
         return {"error": "nop"}
