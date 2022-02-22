@@ -66,9 +66,18 @@ def register_validate(mail, conf_mail, passwd, conf_passwd, timestamp):
         return {"error": "pass_miss_match"}
 
 def create_code(length):
+    """
+    " ` ", ' " ', " ' " ve " \\ " kod oluşturmada kullanılmamalı. Onaylanırken hata çıkartıyor.
+    """
     code = ""
     for x in range(length):
-        code += random.choice(string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits)[0]
+        while True:
+            char = random.choice(string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits)[0]
+            if char == "\\" or char == "`" or char == "'" or char == '"':
+                continue
+            else:
+                code += char
+                break
     return code
 
 def send_verify_mail(mail, code):
