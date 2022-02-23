@@ -2,6 +2,7 @@ from routes import Index
 from routes import Register
 from routes import Login
 from routes import Validate
+from routes import ProfileCreate
 
 routes = [
     {
@@ -26,6 +27,12 @@ routes = [
         "route": "/validate",
         "name": "validate",
         "function": Validate.main,
+        "methods": ["POST"]
+    },
+    {
+        "route": "/profile/create",
+        "name": "profile/create",
+        "function": ProfileCreate.main,
         "methods": ["POST"]
     }
 ]

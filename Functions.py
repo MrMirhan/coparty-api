@@ -111,5 +111,31 @@ def verify_code(code, ts):
         logger.critical(e)
         return {"error": "selecting_database_error"}
 
-if __name__ == "__main__":
-    login_user("hamzaalmendi@gmail.com", "x159951A!")
+def check_profile(mail, profile_type):
+    if profile_type == "individual":
+        try:
+            mycursor = dbparty.cursor()
+            mycursor.execute("SELECT * FROM individual_profile where mail = '%s'" % (mail))
+            myresult = mycursor.fetchall()
+            if len(myresult) > 0:
+                return myresult[0]
+            return {"success": "unique_mail"}
+        except Exception as e:
+            logger.critical(e)
+            return {"error": "selecting_database_error"}
+
+def create_profile_individual(id, mail, name, description, image_list, interest_list, experience_list, educational_list, profile_package, timestamp):
+    try:
+        check_profile(mail, "individual")['success']
+    except:
+        return {"error": "already_registered_profile"}
+    try:
+        mycursor = dbparty.cursor()
+        sql = "INSERT INTO individual_profile (id, mail, name, description, image_list, interest_list, experience_list, educational_list, profile_package, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (id, mail, name, description, image_list, interest_list, experience_list, educational_list, profile_package, timestamp, timestamp)
+        mycursor.execute(sql, val)
+        dbparty.commit()
+        return {"success": "individual_profile_created"}
+    except Exception as e:
+        logger.critical(e)
+        return {"error": "writing_database_error"}
