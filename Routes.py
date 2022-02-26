@@ -84,6 +84,12 @@ routes = [
         "methods": ["POST"]
     },
     {
+        "route": "/admin/add/experience",
+        "name": "admin/add/experience",
+        "function": AddExperience.main,
+        "methods": ["POST"]
+    },
+    {
         "route": "/admin/add/package",
         "name": "admin/add/package",
         "function": AddPackage.main,
