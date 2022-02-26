@@ -6,14 +6,14 @@ from routes import Validate
 
 from routes import ProfileCreate
 
-from routes import AddEducation
-from routes import AddEducationType
-from routes import AddInterest
-from routes import AddInterestType
-from routes import AddImage
-from routes import AddImageType
-from routes import AddExperience
-from routes import AddPackage
+from routes import Education
+from routes import EducationType
+from routes import Interest
+from routes import InterestType
+from routes import Image
+from routes import ImageType
+from routes import Experience
+from routes import Packages
 
 
 routes = [
@@ -45,54 +45,54 @@ routes = [
         "route": "/profile/create",
         "name": "profile/create",
         "function": ProfileCreate.main,
-        "methods": ["POST"]
+        "methods": ["PUT", "PATCH"]
     },
     {
-        "route": "/admin/add/type/education",
-        "name": "admin/add/type/education",
-        "function": AddEducationType.main,
-        "methods": ["POST"]
+        "route": "/admin/type/education",
+        "name": "admin/type/education",
+        "function": EducationType.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/type/interest",
-        "name": "admin/add/type/interest",
-        "function": AddInterestType.main,
-        "methods": ["POST"]
+        "route": "/admin/type/interest",
+        "name": "admin/type/interest",
+        "function": InterestType.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/type/image",
-        "name": "admin/add/type/image",
-        "function": AddImageType.main,
-        "methods": ["POST"]
+        "route": "/admin/type/image",
+        "name": "admin/type/image",
+        "function": ImageType.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/education",
-        "name": "admin/add/education",
-        "function": AddEducation.main,
-        "methods": ["POST"]
+        "route": "/profile/education",
+        "name": "admin/education",
+        "function": Education.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/interest",
-        "name": "admin/add/interest",
-        "function": AddInterest.main,
-        "methods": ["POST"]
+        "route": "/profile/interest",
+        "name": "admin/interest",
+        "function": Interest.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/image",
-        "name": "admin/add/image",
-        "function": AddImage.main,
-        "methods": ["POST"]
+        "route": "/profile/image",
+        "name": "admin/image",
+        "function": Image.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/experience",
-        "name": "admin/add/experience",
-        "function": AddExperience.main,
-        "methods": ["POST"]
+        "route": "/profile/experience",
+        "name": "admin/experience",
+        "function": Experience.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     },
     {
-        "route": "/admin/add/package",
-        "name": "admin/add/package",
-        "function": AddPackage.main,
-        "methods": ["POST"]
+        "route": "/admin/packages",
+        "name": "admin/packages",
+        "function": Packages.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
     }
 ]
