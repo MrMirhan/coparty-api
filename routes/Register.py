@@ -1,7 +1,7 @@
 from flask import request
 import sys, time, datetime
 sys.path.append('../')
-from Functions import *
+from utils.Functions import *
 
 def main():
     ts = time.time()

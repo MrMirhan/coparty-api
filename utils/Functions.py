@@ -1,8 +1,8 @@
-from Database import dbparty
+from .Database import dbparty
 import time, datetime
 import bcrypt
 import logging, string, random
-from Mail import Mail
+from .Mail import Mail
 
 logger= logging.getLogger()
 
