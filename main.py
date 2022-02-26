@@ -1,7 +1,6 @@
 from flask import Flask
 import config
 from utils import Logger
-from threading import Thread
 import Routes
 
 logger = Logger.logger
