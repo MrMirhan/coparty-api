@@ -8,3 +8,5 @@ def main():
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     if request.method == "PUT":
         return add_education(request.form['user'], request.form['name'], request.form['continent_name'], int(request.form['type']), request.form['description'], timestamp)
+    if request.method == "GET":
+        return get_education(request.form['user'])
