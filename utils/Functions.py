@@ -4,6 +4,7 @@ import time, datetime
 import bcrypt
 import logging, string, random, json
 from .Mail import Mail
+from .Returns import messages as return_messages
 
 logger= logging.getLogger()
 
@@ -24,7 +25,7 @@ def check_data(table, column=None, value=None, additional=None):
         return myresult
     except Exception as e:
         logger.critical(e)
-        return {"error": "selecting_database_error"}
+        return return_messages[8]
 
 """
 REGISTER PARTS
@@ -45,21 +46,21 @@ def register_user(name, surname, mail, passwd, timestamp):
             return code_res
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 def register_validate(mail, conf_mail, passwd, conf_passwd, timestamp):
     if mail == conf_mail and passwd == conf_passwd:
         passwd = bcrypt.hashpw(str.encode(passwd), bcrypt.gensalt())
         datas = check_data("registration", "mail", mail)
         if len(datas) > 0:
-            return {"error": "already_registered"}
+            return return_messages[15]
         else:
             return register_user(mail, passwd, timestamp)
             
     elif mail != conf_mail:
-        return {"error": "mail_miss_match"}
+        return return_messages[3]
     elif passwd != conf_passwd:
-        return {"error": "pass_miss_match"}
+        return return_messages[401]
 
 
 """
@@ -91,7 +92,7 @@ Your verification code is: %s
     if sent == True:
         return {"success": "verification_code_sent"}
     else:
-        return {"error": "error_while_sending_mail"}
+        return return_messages[9]
 
 def verify_code(code, ts):
     try:
@@ -105,11 +106,11 @@ def verify_code(code, ts):
                     return {'success': 'user_verified'}
                 except Exception as e:
                     logger.critical(e)
-                    return {"error": "writing_database_error"}
-        return {"error": "code_not_found"}
+                    return return_messages[7]
+        return return_messages[4]
     except Exception as e:
         logger.critical(e)
-        return {"error": "selecting_database_error"}
+        return return_messages[8]
 
 """
 LOGIN PARTS
@@ -123,12 +124,12 @@ def login_user(mail, passwd):
                 if bcrypt.hashpw(str.encode(passwd), str.encode(result[3])) == str.encode(result[3]):
                    return {'success': 'user_can_logged_in'}
                 else:
-                    return {'error': 'wrong_password'}
+                    return return_messages[10]
         else:
             return {"error": "mail_not_registered"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "selecting_database_error"}
+        return return_messages[8]
 
 """
 PROFILE PARTS
@@ -137,7 +138,7 @@ PROFILE PARTS
 def create_profile_individual(id, mail, name, surname, description, image_list, interest_list, experience_list, educational_list, profile_package, timestamp):
     datas = check_data("individual_profile", "mail", mail)
     if len(datas) > 0:    
-        return {"error": "already_registered_profile"}
+        return return_messages[15]
     try:
         mycursor = dbparty.cursor()
         sql = "INSERT INTO individual_profile (id, mail, name, surname, description, image_list, interest_list, experience_list, educational_list, profile_package, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -148,7 +149,7 @@ def create_profile_individual(id, mail, name, surname, description, image_list, 
         return {"success": "individual_profile_created"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 """
 TYPE ADDING PARTS
@@ -157,7 +158,7 @@ TYPE ADDING PARTS
 def add_education_type(name, continent, timestamp):
     datas = check_data("education_types", "continent_name", continent)
     if len(datas) > 0:
-        return {'error': 'education_type_not_unique'}
+        return return_messages[11]
     try:
         mycursor = dbparty.cursor()
         sql = "INSERT INTO education_types (name, continent_name, created_at, last_modified_at) VALUES (%s, %s, %s, %s)"
@@ -167,12 +168,12 @@ def add_education_type(name, continent, timestamp):
         return {"success": "education_type_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 def add_interest_type(name, continent, timestamp):
     datas = check_data("interest_types", "continent_name", continent)
     if len(datas) > 0:
-        return {'error': 'interest_type_not_unique'}
+        return return_messages[12]
     try:
         mycursor = dbparty.cursor()
         sql = "INSERT INTO interest_types (name, continent_name, created_at, last_modified_at) VALUES (%s, %s, %s, %s)"
@@ -182,12 +183,12 @@ def add_interest_type(name, continent, timestamp):
         return {"success": "interest_type_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 def add_package(name, continent, description, price, timestamp):
     datas = check_data("profile_packages", "continent_name", continent)
     if len(datas) > 0:
-        return {'error': 'package_not_unique'}
+        return return_messages[13]
     try:
         mycursor = dbparty.cursor()
         sql = "INSERT INTO profile_packages (name, continent_name, description, price, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s)"
@@ -197,7 +198,7 @@ def add_package(name, continent, description, price, timestamp):
         return {"success": "package_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 """
 EXPERIENCE, EDUCATION, INTEREST `PUT` REQUESTS
@@ -207,21 +208,21 @@ def check_reg_prof(user):
     regdata = check_data("registration", "id", user)
     if not type(regdata) == list and 'error' in regdata.keys(): return regdata
     if len(regdata) < 1:
-        return {"error": "user_not_found"}
+        return return_messages[0]
     if regdata[0][3] == 1:
         profiledata = check_data("individual_profile", "id", user)
         if len(profiledata) < 1:
-            return {"error": "profile_is_not_created"}
+            return return_messages[1]
         else:
             return {"success": "profile_found", "profile": profiledata[0], "profile_type": 1}
     elif regdata[0][3] == 2:
         profiledata = check_data("business_profile", "id", user)
         if len(profiledata) < 1:
-            return {"error": "profile_is_not_created"}
+            return return_messages[1]
         else:
             return {"success": "profile_found", "profile": profiledata[0], "profile_type": 2}
     else:
-        return {"error": "profile_is_not_created"}
+        return return_messages[1]
 
 def add_experience(user, name, continent, company, description, timestamp):
     check = check_reg_prof(user)
@@ -241,11 +242,11 @@ def add_experience(user, name, continent, company, description, timestamp):
         return {"success": "experience_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 def add_education(user, name, continent, etype, description, timestamp):
     if len(check_data("education_types", "id", etype)) < 1:
-        return {"error": "education_type_not_found"}
+        return return_messages[11]
     check = check_reg_prof(user)
     if "error" in check.keys(): return check
     try:
@@ -263,7 +264,7 @@ def add_education(user, name, continent, etype, description, timestamp):
         return {"success": "education_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
 
 def add_interest(user, name, continent, etype, description, timestamp):
     if len(check_data("interest_types", "id", etype)) < 1:
@@ -274,7 +275,7 @@ def add_interest(user, name, continent, etype, description, timestamp):
         if check['profile_type'] == 1:
             newlist = json.loads(check['profile'][6])
             if interestCheck[0][0] in newlist:
-                return {'error': 'interest_exist'}
+                return return_messages[16]
             newlist.append(interestCheck[0][0])
             mycursor = dbparty.cursor()
             mycursor.execute("UPDATE individual_profile SET interest_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
@@ -296,4 +297,16 @@ def add_interest(user, name, continent, etype, description, timestamp):
         return {"success": "interest_added"}
     except Exception as e:
         logger.critical(e)
-        return {"error": "writing_database_error"}
+        return return_messages[7]
+
+"""
+
+"""
+
+def get_interest(user):
+    profileCheck = check_reg_prof(user)
+    if "error" in profileCheck:
+        return profileCheck
+    if profileCheck['profile_type'] == 1:
+        profileInterests = profileCheck['profile'][6]
+        return {'status': True, 'interests': json.loads(profileInterests)}
