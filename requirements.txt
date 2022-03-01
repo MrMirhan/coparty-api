@@ -1,0 +1,6 @@
+bcrypt
+datetime
+mysql
+smtplib
+ssl
+flask
