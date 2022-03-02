@@ -1,6 +1,4 @@
 bcrypt
 datetime
-mysql
-smtplib
-ssl
+mysql-connector
 flask

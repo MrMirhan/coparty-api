@@ -15,7 +15,8 @@ def check_data(table, column=None, value=None, additional=None):
         mycursor = dbparty.cursor()
         query = "SELECT * FROM %s" % (table)
         if column is not None and value is not None:
-            query += " where %s = '%s'" % (column, value)
+            if  type(value) == str: value = '"%s"' % (value)
+            query += " where %s = %s" % (column, value)
         if additional is not None:
             query += additional
         mycursor.execute(query)
@@ -33,7 +34,7 @@ def register_user(name, surname, mail, passwd, timestamp):
     try:
         code = str(create_code(12))
         code_res = send_verify_mail(mail, code)
-        if code['status'] == 'success':
+        if code_res['status'] == 'success':
             mycursor = dbparty.cursor()
             sql = "INSERT INTO registration (name, surname, type, mail, paswd, paswd_confirm, mail_confirmed, mail_confirm_code, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             val = (name, surname, 0, mail, passwd, passwd, 0, code, timestamp, timestamp)
@@ -112,12 +113,12 @@ def verify_code(code, ts):
 LOGIN PARTS
 """
 
-def login_user(mail, passwd):
+def login_user(mail: str, passwd: str):
     try:
         datas = check_data("registration", "mail", mail)
         if len(datas) > 0:
             for result in datas:
-                if bcrypt.hashpw(str.encode(passwd), str.encode(result[3])) == str.encode(result[3]):
+                if bcrypt.hashpw(str.encode(passwd), str.encode(result[5])) == str.encode(result[5]):
                    return return_messages[18]
                 else:
                     return return_messages[10]
