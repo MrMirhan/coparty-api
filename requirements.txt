@@ -2,3 +2,4 @@ bcrypt
 datetime
 mysql-connector
 flask
+flask_session

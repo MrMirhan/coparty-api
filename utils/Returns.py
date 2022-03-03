@@ -259,5 +259,59 @@ messages = [
         "code": 201,
         "message": "Interest type successfully created.",
         "json": None
+    },
+    {
+        "id": 29,
+        "status": "error",
+        "type": "UNAUTHORIZED",
+        "name": "USER_NOT_VERIFIED",
+        "code": 401,
+        "message": "User is not verified his/her account.",
+        "json": None
+    },
+    {
+        "id": 30,
+        "status": "success",
+        "type": "OK",
+        "name": "AUTH_VERIFIED",
+        "code": 200,
+        "message": "Session started.",
+        "json": None
+    },
+    {
+        "id": 31,
+        "status": "error",
+        "type": "UNAUTHORIZED",
+        "name": "AUTH_CODE_ERROR",
+        "code": 401,
+        "message": "Authentication code is not valid.",
+        "json": None
+    },
+    {
+        "id": 32,
+        "status": "error",
+        "type": "UNAUTHORIZED",
+        "name": "NOT_AUTHED",
+        "code": 401,
+        "message": "System not authed.",
+        "json": None
+    },
+    {
+        "id": 33,
+        "status": "success",
+        "type": "OK",
+        "name": "ALREADY_AUTHED",
+        "code": 200,
+        "message": "Session already started.",
+        "json": None
+    },
+    {
+        "id": 34,
+        "status": "error",
+        "type": "NOT_FOUND",
+        "name": "WORONG_URL",
+        "code": 404,
+        "message": "This route is not accessible.",
+        "json": None
     }
 ]

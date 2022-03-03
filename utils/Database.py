@@ -7,5 +7,6 @@ dbparty = mysql.connect(
   host=config.MYSQL_HOST,
   user=config.MYSQL_USER,
   password=config.MYSQL_PASSWORD,
-  database=config.MYSQL_DATABASE
+  database=config.MYSQL_DATABASE,
+  auth_plugin='mysql_native_password'
 )

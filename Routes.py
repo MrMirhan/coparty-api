@@ -1,8 +1,12 @@
 from routes import Index
 
+from routes import Auth
+
 from routes import Register
 from routes import Login
+
 from routes import Validate
+from routes import SendCode
 
 from routes import ProfileCreate
 
@@ -39,6 +43,18 @@ routes = [
         "route": "/validate",
         "name": "validate",
         "function": Validate.main,
+        "methods": ["POST"]
+    },
+    {
+        "route": "/auth",
+        "name": "Authenticate",
+        "function": Auth.main,
+        "methods": ["POST"]
+    },
+    {
+        "route": "/sendcode",
+        "name": "send_code",
+        "function": SendCode.main,
         "methods": ["POST"]
     },
     {

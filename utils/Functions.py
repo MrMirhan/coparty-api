@@ -1,8 +1,10 @@
+import logging, string, random, json, bcrypt, sys
 from .Database import dbparty
-import bcrypt
-import logging, string, random, json
 from .Mail import Mail
 from .Returns import messages as return_messages
+sys.path.append("../..")
+import config
+
 
 logger= logging.getLogger()
 
@@ -30,21 +32,20 @@ def check_data(table, column=None, value=None, additional=None):
 REGISTER PARTS
 """
 
+def send_code(code, mail):
+    return send_verify_mail(mail, code)
+
 def register_user(name, surname, mail, passwd, timestamp):
     try:
         code = str(create_code(12))
-        code_res = send_verify_mail(mail, code)
-        if code_res['status'] == 'success':
-            mycursor = dbparty.cursor()
-            sql = "INSERT INTO registration (name, surname, type, mail, paswd, paswd_confirm, mail_confirmed, mail_confirm_code, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            val = (name, surname, 0, mail, passwd, passwd, 0, code, timestamp, timestamp)
-            mycursor.execute(sql, val)
-            dbparty.commit()
-            response = return_messages[25]
-            response['json'] = check_data("registration", "mail", mail)
-            return response
-        else:
-            return code_res
+        mycursor = dbparty.cursor()
+        sql = "INSERT INTO registration (name, surname, type, roles, mail, paswd, paswd_confirm, mail_confirmed, mail_confirm_code, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (name, surname, 0, "[]", mail, passwd, passwd, 0, code, timestamp, timestamp)
+        mycursor.execute(sql, val)
+        dbparty.commit()
+        response = return_messages[25]
+        response['json'] = check_data("registration", "mail", mail)
+        return response
     except Exception as e:
         logger.critical(e)
         return return_messages[7]
@@ -118,8 +119,13 @@ def login_user(mail: str, passwd: str):
         datas = check_data("registration", "mail", mail)
         if len(datas) > 0:
             for result in datas:
-                if bcrypt.hashpw(str.encode(passwd), str.encode(result[5])) == str.encode(result[5]):
-                   return return_messages[18]
+                if bcrypt.hashpw(str.encode(passwd), str.encode(result[6])) == str.encode(result[6]):
+                    if result[8] == 1:
+                        response = return_messages[18]
+                        response['json'] = result
+                        return response
+                    else:
+                        return return_messages[29]
                 else:
                     return return_messages[10]
         else:
