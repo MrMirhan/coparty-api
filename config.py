@@ -12,6 +12,8 @@ def cc(length):
                 break
     return code
 
+TELEGRAM_TOKEN = "5209834142:AAGH8AgjNSVOcXrJoM9v6cGGD--EjTUHoXY"
+
 SERVER_HOST = '0.0.0.0'
 SERVER_PORT = 80
 SERVER_DEBUG = True
