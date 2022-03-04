@@ -4,7 +4,7 @@ def cc(length):
     code = ""
     for x in range(length):
         while True:
-            char = random.choice(string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits)[0]
+            char = random.choice((string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits).replace(" ", ""))[0]
             if char == "\\" or char == "`" or char == "'" or char == '"':
                 continue
             else:
