@@ -117,14 +117,15 @@ $ python main.py
 | image_list| Array | | Image list inside only id of educations. |
 | image_list[n] | Integer | 0 | Wanted image id to add profile. |
 
-### 7. Validate
+### 7. Education Type
 
-- Methods: POST
-- Endpoint: /validate
+- Methods: PUT, GET
+- Endpoint: /admin/type/education
 
 #### Request
 - Format: FORM DATA
 
 | Name                 | Type    | Example value          | Description     |
 | -------------------- | ------- | ---------------------- | --------------- |
-| code | String | #S7+C=VmN_&n!OtP7IUQ | Verification that sent to user's email. |
+| name | String | Lisans | Name of education type. |
+| continent_name | String | lisans | Name of education type. |
