@@ -26,7 +26,9 @@ def check_data(table, column=None, value=None, additional=None):
         return myresult
     except Exception as e:
         logger.critical(e)
-        return return_messages[8]
+        response = return_messages[8]
+        response['json'] = {'error': e}
+        return response
 
 """
 REGISTER PARTS
@@ -48,7 +50,9 @@ def register_user(name, surname, mail, passwd, timestamp):
         return response
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 def register_validate(name, surname, mail, passwd, conf_passwd, timestamp):
     if passwd == conf_passwd:
@@ -104,11 +108,15 @@ def verify_code(code, ts):
                     return return_messages[17]
                 except Exception as e:
                     logger.critical(e)
-                    return return_messages[7]
+                    response = return_messages[7]
+                    response['json'] = {'error': e}
+                    return response
         return return_messages[4]
     except Exception as e:
         logger.critical(e)
-        return return_messages[8]
+        response = return_messages[8]
+        response['json'] = {'error': e}
+        return response
 
 """
 LOGIN PARTS
@@ -132,7 +140,9 @@ def login_user(mail: str, passwd: str):
             return return_messages[3]
     except Exception as e:
         logger.critical(e)
-        return return_messages[8]
+        response = return_messages[8]
+        response['json'] = {'error': e}
+        return response
 
 """
 PROFILE PARTS
@@ -154,7 +164,9 @@ def create_profile_individual(id, mail, name, surname, description, image_list, 
         return response
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 """
 TYPE ADDING PARTS
@@ -188,7 +200,9 @@ def add_interest_type(name, continent, timestamp):
         return return_messages[28]
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 def add_package(name, continent, description, price, timestamp):
     datas = check_data("profile_packages", "continent_name", continent)
@@ -203,7 +217,9 @@ def add_package(name, continent, description, price, timestamp):
         return return_messages[21]
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 """
 EXPERIENCE, EDUCATION, INTEREST `PUT` REQUESTS
@@ -251,7 +267,9 @@ def add_experience(user, name, continent, company, description, timestamp):
         return return_messages[24]
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 def add_education(user, name, continent, etype, description, timestamp):
     if len(check_data("education_types", "id", etype)) < 1:
@@ -273,7 +291,9 @@ def add_education(user, name, continent, etype, description, timestamp):
         return return_messages[23]
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 def add_interest(user, name, continent, etype, description, timestamp):
     if len(check_data("interest_types", "id", etype)) < 1:
@@ -306,7 +326,9 @@ def add_interest(user, name, continent, etype, description, timestamp):
         return return_messages[22]
     except Exception as e:
         logger.critical(e)
-        return return_messages[7]
+        response = return_messages[7]
+        response['json'] = {'error': e}
+        return response
 
 """
 
