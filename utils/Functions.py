@@ -281,17 +281,17 @@ def add_interest(user, name, continent, etype, description, timestamp):
     interestCheck = check_data("interests", "continent_name", continent, "AND type = %s" % (etype))
     check = check_reg_prof(user)
     if check['status'] == "error": return check
-    if len(interestCheck) > 0:
-        if check['json']['profile_type'] == 1:
-            newlist = json.loads(check['profile'][6])
-            if interestCheck[0][0] in newlist:
-                return return_messages[16]
-            newlist.append(interestCheck[0][0])
-            mycursor = dbparty.cursor()
-            mycursor.execute("UPDATE individual_profile SET interest_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
-            dbparty.commit()
-        return return_messages[22]
     try:
+        if len(interestCheck) > 0:
+            if check['json']['profile_type'] == 1:
+                newlist = json.loads(check['profile'][6])
+                if interestCheck[0][0] in newlist:
+                    return return_messages[16]
+                newlist.append(interestCheck[0][0])
+                mycursor = dbparty.cursor()
+                mycursor.execute("UPDATE individual_profile SET interest_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
+                dbparty.commit()
+                return return_messages[22]
         mycursor = dbparty.cursor()
         sql = "INSERT INTO interests (name, continent_name, type, description, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s)"
         val = (name, continent, etype, description, timestamp, timestamp)
