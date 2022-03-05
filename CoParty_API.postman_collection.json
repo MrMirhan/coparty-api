@@ -1,0 +1,572 @@
+{
+    "info": {
+        "_postman_id": "a7031a68-4268-4a22-b678-419cea3e3ccd",
+        "name": "CoParty_API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [{
+            "name": "http://139.59.133.94/auth",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                        "key": "authcode",
+                        "value": "LI=XPXT5m_6qPd%hv}(lO",
+                        "type": "default"
+                    }]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/auth",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "auth"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/register",
+            "protocolProfileBehavior": {
+                "strictSSL": false,
+                "followRedirects": false
+            },
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "name",
+                            "value": "Hamza Mirhan",
+                            "type": "default"
+                        },
+                        {
+                            "key": "surname",
+                            "value": "Almendi",
+                            "type": "default"
+                        },
+                        {
+                            "key": "mail",
+                            "value": "mrmirhann@gmail.com",
+                            "type": "default"
+                        },
+                        {
+                            "key": "passwd",
+                            "value": "x159951A!",
+                            "type": "default"
+                        },
+                        {
+                            "key": "conf_passwd",
+                            "value": "x159951A!",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/register",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/login",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "mail",
+                            "value": "hamzaalmendi@gmail.com",
+                            "type": "default"
+                        },
+                        {
+                            "key": "passwd",
+                            "value": "x159951A!",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/login",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/sendcode",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "code",
+                            "value": "1234",
+                            "type": "default"
+                        },
+                        {
+                            "key": "mail",
+                            "value": "hamzaalmendi@gmail.com",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/sendcode",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "sendcode"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/validate",
+            "request": {
+                "method": "POST",
+                "header": [{
+                    "key": "",
+                    "value": "",
+                    "type": "default"
+                }],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                        "key": "code",
+                        "value": "Jlh-2*q:v%p",
+                        "type": "default"
+                    }]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/validate",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "validate"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/create",
+            "request": {
+                "method": "POST",
+                "header": [{
+                    "key": "",
+                    "value": "",
+                    "type": "default"
+                }],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "id",
+                            "value": "12",
+                            "type": "default"
+                        },
+                        {
+                            "key": "mail",
+                            "value": "hamzaalmendi@gmail.com",
+                            "type": "default"
+                        },
+                        {
+                            "key": "name",
+                            "value": "Hamza Mirhan Almendi",
+                            "type": "default"
+                        },
+                        {
+                            "key": "description",
+                            "value": "Test",
+                            "type": "default"
+                        },
+                        {
+                            "key": "image_list",
+                            "value": "[]",
+                            "type": "default"
+                        },
+                        {
+                            "key": "interest_list",
+                            "value": "[]",
+                            "type": "default"
+                        },
+                        {
+                            "key": "experience_list",
+                            "value": "[]",
+                            "type": "default"
+                        },
+                        {
+                            "key": "educational_list",
+                            "value": "[]",
+                            "type": "default"
+                        },
+                        {
+                            "key": "profile_package",
+                            "value": "0",
+                            "type": "default"
+                        },
+                        {
+                            "key": "profile_type",
+                            "value": "individual",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/create",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "create"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/admin/add/type/education",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "name",
+                            "value": "İlk Okul",
+                            "type": "default"
+                        },
+                        {
+                            "key": "continent_name",
+                            "value": "ilk_okul",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/admin/type/education",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "admin",
+                        "type",
+                        "education"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/admin/add/type/interest",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "name",
+                            "value": "Specialist",
+                            "type": "default"
+                        },
+                        {
+                            "key": "continent_name",
+                            "value": "specialist",
+                            "type": "default"
+                        },
+                        {
+                            "key": "Description",
+                            "value": "Specialist type of interest.",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/admin/type/interest",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "admin",
+                        "type",
+                        "interest"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/education",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "user",
+                            "value": "12",
+                            "type": "default"
+                        },
+                        {
+                            "key": "name",
+                            "value": "Istanbul University",
+                            "type": "default"
+                        },
+                        {
+                            "key": "continent_name",
+                            "value": "istanbul-university",
+                            "type": "default"
+                        },
+                        {
+                            "key": "type",
+                            "value": "2",
+                            "type": "default"
+                        },
+                        {
+                            "key": "description",
+                            "value": "International Trade and Logistics Bachelor's Degree",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/education",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "education"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/interest",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "user",
+                            "value": "12",
+                            "type": "default"
+                        },
+                        {
+                            "key": "name",
+                            "value": "Communiation",
+                            "type": "default"
+                        },
+                        {
+                            "key": "continent_name",
+                            "value": "communication",
+                            "type": "default"
+                        },
+                        {
+                            "key": "type",
+                            "value": "1",
+                            "type": "default"
+                        },
+                        {
+                            "key": "description",
+                            "value": "Show me candidates who have advanced communication skills.",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/interest",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "interest"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/experience",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                            "key": "user",
+                            "value": "12",
+                            "type": "default"
+                        },
+                        {
+                            "key": "name",
+                            "value": "Jr. Developer",
+                            "type": "default"
+                        },
+                        {
+                            "key": "continent_name",
+                            "value": "jr-developer",
+                            "type": "default"
+                        },
+                        {
+                            "key": "company",
+                            "value": "NOC Bilişim",
+                            "type": "default"
+                        },
+                        {
+                            "key": "description",
+                            "value": "I was jr. dev at noc",
+                            "type": "default"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/experience",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "experience"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/interest",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                        "key": "user",
+                        "value": "12",
+                        "type": "default"
+                    }]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/interest",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "interest"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://139.59.133.94/profile/education",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [{
+                        "key": "user",
+                        "value": "12",
+                        "type": "default"
+                    }]
+                },
+                "url": {
+                    "raw": "http://139.59.133.94/profile/education",
+                    "protocol": "http",
+                    "host": [
+                        "139",
+                        "59",
+                        "133",
+                        "94"
+                    ],
+                    "path": [
+                        "profile",
+                        "education"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
