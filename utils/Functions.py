@@ -27,7 +27,7 @@ def check_data(table, column=None, value=None, additional=None):
     except Exception as e:
         logger.critical(e)
         response = return_messages[8]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
@@ -51,7 +51,7 @@ def register_user(name, surname, mail, passwd, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 def register_validate(name, surname, mail, passwd, conf_passwd, timestamp):
@@ -109,13 +109,13 @@ def verify_code(code, ts):
                 except Exception as e:
                     logger.critical(e)
                     response = return_messages[7]
-                    response['json'] = {'error': e}
+                    response['json'] = {'error': str(e)}
                     return response
         return return_messages[4]
     except Exception as e:
         logger.critical(e)
         response = return_messages[8]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
@@ -141,7 +141,7 @@ def login_user(mail: str, passwd: str):
     except Exception as e:
         logger.critical(e)
         response = return_messages[8]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
@@ -165,7 +165,7 @@ def create_profile_individual(id, mail, name, surname, description, image_list, 
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
@@ -201,7 +201,7 @@ def add_interest_type(name, continent, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 def add_package(name, continent, description, price, timestamp):
@@ -218,7 +218,7 @@ def add_package(name, continent, description, price, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
@@ -268,7 +268,7 @@ def add_experience(user, name, continent, company, description, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 def add_education(user, name, continent, etype, description, timestamp):
@@ -292,7 +292,7 @@ def add_education(user, name, continent, etype, description, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 def add_interest(user, name, continent, etype, description, timestamp):
@@ -327,7 +327,7 @@ def add_interest(user, name, continent, etype, description, timestamp):
     except Exception as e:
         logger.critical(e)
         response = return_messages[7]
-        response['json'] = {'error': e}
+        response['json'] = {'error': str(e)}
         return response
 
 """
