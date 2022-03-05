@@ -255,7 +255,7 @@ def add_experience(user, name, continent, company, description, timestamp):
         mycursor.execute(sql, val)
         dbparty.commit()
         if check['json']['profile_type'] == 1:
-            newlist = json.loads(check['profile'][7])
+            newlist = json.loads(check['json']['profile'][7])
             newlist.append(check_data('experiences')[-1][0])
             mycursor = dbparty.cursor()
             mycursor.execute("UPDATE individual_profile SET experience_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
@@ -279,7 +279,7 @@ def add_education(user, name, continent, etype, description, timestamp):
         mycursor.execute(sql, val)
         dbparty.commit()
         if check['json']['profile_type'] == 1:
-            newlist = json.loads(check['profile'][8])
+            newlist = json.loads(check['json']['profile'][8])
             newlist.append(check_data('educations')[-1][0])
             mycursor = dbparty.cursor()
             mycursor.execute("UPDATE individual_profile SET educational_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
@@ -300,7 +300,7 @@ def add_interest(user, name, continent, etype, description, timestamp):
     try:
         if len(interestCheck) > 0:
             if check['json']['profile_type'] == 1:
-                newlist = json.loads(check['profile'][6])
+                newlist = json.loads(check['json']['profile'][6])
                 if interestCheck[0][0] in newlist:
                     return return_messages[16]
                 newlist.append(interestCheck[0][0])
@@ -314,7 +314,7 @@ def add_interest(user, name, continent, etype, description, timestamp):
         mycursor.execute(sql, val)
         dbparty.commit()
         if check['json']['profile_type'] == 1:
-            newlist = json.loads(check['profile'][6])
+            newlist = json.loads(check['json']['profile'][6])
             newlist.append(check_data('interests')[-1][0])
             mycursor = dbparty.cursor()
             mycursor.execute("UPDATE individual_profile SET interest_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
