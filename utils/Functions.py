@@ -211,7 +211,7 @@ EXPERIENCE, EDUCATION, INTEREST `PUT` REQUESTS
 
 def check_reg_prof(user):
     regdata = check_data("registration", "id", user)
-    if not type(regdata) == list and regdata['status'] == "error": return regdata
+    if type(regdata) != list and regdata['status'] == "error": return regdata
     if len(regdata) < 1:
         return return_messages[0]
     if regdata[0][3] == 1:
@@ -280,6 +280,7 @@ def add_interest(user, name, continent, etype, description, timestamp):
         return return_messages[12]
     interestCheck = check_data("interests", "continent_name", continent, "AND type = %s" % (etype))
     check = check_reg_prof(user)
+    if check['status'] == "error": return check
     if len(interestCheck) > 0:
         if check['json']['profile_type'] == 1:
             newlist = json.loads(check['profile'][6])
@@ -290,7 +291,6 @@ def add_interest(user, name, continent, etype, description, timestamp):
             mycursor.execute("UPDATE individual_profile SET interest_list = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(newlist), timestamp, user))
             dbparty.commit()
         return return_messages[22]
-    if check['status'] == "error": return check
     try:
         mycursor = dbparty.cursor()
         sql = "INSERT INTO interests (name, continent_name, type, description, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s)"
