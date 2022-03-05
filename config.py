@@ -2,14 +2,13 @@ import random, string
 
 def cc(length):
     code = ""
+    banned = ["\\", '"', "'", "`", "|", "^"]
     for x in range(length):
         while True:
             char = random.choice((string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits).replace(" ", ""))[0]
-            if char == "\\" or char == "`" or char == "'" or char == '"':
-                continue
-            else:
-                code += char
-                break
+            if char in banned: continue
+            code += char
+            break
     return code
 
 TELEGRAM_TOKEN = "5209834142:AAGH8AgjNSVOcXrJoM9v6cGGD--EjTUHoXY"
