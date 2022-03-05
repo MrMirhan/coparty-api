@@ -2,7 +2,7 @@ import random, string
 
 def cc(length):
     code = ""
-    banned = ["\\", '"', "'", "`", "|", "^"]
+    banned = ["\\", '"', "'", "`", "|", "^", "#"]
     for x in range(length):
         while True:
             char = random.choice((string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits).replace(" ", ""))[0]

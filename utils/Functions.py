@@ -70,18 +70,14 @@ VALIDATE FUNCTIONS
 """
 
 def create_code(length):
-    """
-    " ` ", ' " ', " ' " ve " \\ " kod oluşturmada kullanılmamalı. Onaylanırken hata çıkartıyor.
-    """
     code = ""
+    banned = ["\\", '"', "'", "`", "|", "^", "#"]
     for x in range(length):
         while True:
-            char = random.choice(string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits)[0]
-            if char == "\\" or char == "`" or char == "'" or char == '"':
-                continue
-            else:
-                code += char
-                break
+            char = random.choice((string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits).replace(" ", ""))[0]
+            if char in banned: continue
+            code += char
+            break
     return code
 
 def send_verify_mail(mail, code):
