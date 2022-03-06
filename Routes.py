@@ -19,6 +19,8 @@ from routes import ImageType
 from routes import Experience
 from routes import Packages
 
+from routes import Permission
+from routes import Role
 
 routes = [
     {
@@ -109,6 +111,18 @@ routes = [
         "route": "/admin/packages",
         "name": "admin/packages",
         "function": Packages.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
+    },
+    {
+        "route": "/admin/role",
+        "name": "admin/role",
+        "function": Role.main,
+        "methods": ["GET", "PUT", "DELETE", "PATCH"]
+    },
+    {
+        "route": "/admin/permission",
+        "name": "admin/permission",
+        "function": Permission.main,
         "methods": ["GET", "PUT", "DELETE", "PATCH"]
     }
 ]
