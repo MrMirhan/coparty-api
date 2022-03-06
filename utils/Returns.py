@@ -313,5 +313,59 @@ messages = [
         "code": 404,
         "message": "This route is not accessible.",
         "json": None
+    },
+    {
+        "id": 35,
+        "status": "error",
+        "type": "CONFLICT",
+        "name": "PERMISSION_NOT_UNIQUE",
+        "code": 409,
+        "message": "Found same permission name in database.",
+        "json": None
+    },
+    {
+        "id": 36,
+        "status": "error",
+        "type": "CONFLICT",
+        "name": "ROLE_NOT_UNIQUE",
+        "code": 409,
+        "message": "Found same role name in database.",
+        "json": None
+    },
+    {
+        "id": 37,
+        "status": "success",
+        "type": "CREATED",
+        "name": "PERMISSION_CREATED",
+        "code": 201,
+        "message": "Permission successfully created.",
+        "json": None
+    },
+    {
+        "id": 38,
+        "status": "success",
+        "type": "OK",
+        "name": "PERMISSION_FOUND",
+        "code": 200,
+        "message": "Permission found.",
+        "json": None
+    },
+    {
+        "id": 39,
+        "status": "success",
+        "type": "OK",
+        "name": "ROLE_FOUND",
+        "code": 200,
+        "message": "Role found.",
+        "json": None
+    },
+    {
+        "id": 40,
+        "status": "success",
+        "type": "CREATED",
+        "name": "ROLE_CREATED",
+        "code": 201,
+        "message": "Role successfully created.",
+        "json": None
     }
 ]

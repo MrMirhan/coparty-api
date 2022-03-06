@@ -1,4 +1,5 @@
 import logging, string, random, json, bcrypt, sys
+from urllib import response
 from .Database import dbparty
 from .Mail import Mail
 from .Returns import messages as return_messages
@@ -350,4 +351,77 @@ def get_education(user):
         profile_data = profileCheck['json']['profile'][8]
         response = return_messages[19]
         response['json'] = {'data': json.loads(profile_data)}
+        return response
+
+"""
+PERMISSIONS AND ROLES GET AND PUT
+"""
+
+def put_permission(name, continent, desc, timestamp):
+    if len(check_data("permissions", "continent_name", continent)) > 0: return return_messages[35]
+    try:
+        mycursor = dbparty.cursor()
+        sql = "INSERT INTO permissions (name, continent_name, description, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s)"
+        val = (name, continent, desc, timestamp, timestamp)
+        mycursor.execute(sql, val)
+        dbparty.commit()
+        response = return_messages[37]
+        response['json'] = check_data("permissions", "continent_name", continent)
+        return response
+    except Exception as e:
+        logger.critical(e)
+        response = return_messages[7]
+        response['json'] = {'error': str(e)}
+        return response
+
+def get_permission(id):
+    perm = check_data("permissions", "id", id)
+    if len(perm) > 0: 
+        response = return_messages[38]
+        response['json'] = perm
+        return response
+
+def put_role(name, continent, desc, perms, timestamp):
+    if len(check_data("roles", "continent_name", continent)) > 0: return return_messages[36]
+    try:
+        mycursor = dbparty.cursor()
+        sql = "INSERT INTO permissions (name, continent_name, description, permissions, created_at, last_modified_at) VALUES (%s, %s, %s, %s, %s, %s)"
+        val = (name, continent, desc, perms, timestamp, timestamp)
+        mycursor.execute(sql, val)
+        dbparty.commit()
+        response = return_messages[40]
+        response['json'] = check_data("roles", "continent_name", continent)
+        return response
+    except Exception as e:
+        logger.critical(e)
+        response = return_messages[7]
+        response['json'] = {'error': str(e)}
+        return response
+
+def get_role():
+    role = check_data("roles", "id", id)
+    if len(role) > 0: 
+        response = return_messages[39]
+        response['json'] = role
+        return response
+
+def update_role(form):
+    pass
+
+def add_role(user_id, permission_id, timestamp):
+    regdata = check_data("registration", "id", user_id)
+    roles = json.loads(regdata[4])
+    if permission_id in roles:
+        response = return_messages[36]
+        response['json'] = roles
+        return response
+    roles.append(permission_id)
+    try:
+        mycursor = dbparty.cursor()
+        mycursor.execute("UPDATE registration SET roles = '%s', last_modified_at = '%s' WHERE id = '%s'" % (json.dumps(roles), timestamp, user_id))
+        dbparty.commit()
+    except Exception as e:
+        logger.critical(e)
+        response = return_messages[7]
+        response['json'] = {'error': str(e)}
         return response
