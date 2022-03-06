@@ -380,6 +380,8 @@ def get_permission(id):
         response = return_messages[38]
         response['json'] = perm
         return response
+    else:
+        return return_messages[35]
 
 def put_role(name, continent, desc, perms, timestamp):
     if len(check_data("roles", "continent_name", continent)) > 0: return return_messages[36]
